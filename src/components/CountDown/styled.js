@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const CountDown = styled.div`
-  /* width: 1440px; */
-  height: 50px;
+  display: ${({ showCountDown }) => (showCountDown ? 'block' : 'none')};
+  min-height: 50px;
   background-color: #1f3162;
+  position: relative;
 `;
 
 export const Content = styled.div`
@@ -12,13 +13,17 @@ export const Content = styled.div`
   font-size: 16px;
   line-height: 31px;
   height: 100%;
+  min-height: 50px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
-export const ContentInfo = styled.div``;
+export const ContentInfo = styled.div`
+  text-align: center;
+`;
 
 export const ContentTime = styled.div`
   margin-left: 2.4rem;
@@ -50,4 +55,24 @@ export const IntervalNumber = styled.span`
   font-weight: bold;
   letter-spacing: 1px;
   text-align: center;
+`;
+
+export const CloseCountDown = styled.span`
+  display: inline-block;
+  height: 1.2rem;
+  width: 1.2rem;
+  position: absolute;
+  top: 50%;
+  right: 3rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
 `;

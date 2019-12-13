@@ -10,10 +10,14 @@ import {
 // styles
 import * as Styled from './styled';
 
+// assets
+import { ReactComponent as CloseIcon } from '../../assets/Close-Button.svg';
+
 const paddTime = n => (parseInt(n) <= 9 ? `0${n}` : n);
 
 export const CountDown = () => {
   const [times, setTimes] = useState({});
+  const [showCountDown, setShowCountDown] = useState(true);
 
   useEffect(() => {
     const interval = handleCountDown();
@@ -45,7 +49,7 @@ export const CountDown = () => {
   };
 
   return (
-    <Styled.CountDown>
+    <Styled.CountDown showCountDown={showCountDown}>
       <Styled.Content>
         <Styled.ContentInfo>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -77,6 +81,9 @@ export const CountDown = () => {
           </Styled.TimeInterval>
         </Styled.ContentTime>
       </Styled.Content>
+      <Styled.CloseCountDown onClick={() => setShowCountDown(false)}>
+        <CloseIcon />
+      </Styled.CloseCountDown>
     </Styled.CountDown>
   );
 };

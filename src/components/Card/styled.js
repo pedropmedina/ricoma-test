@@ -3,12 +3,17 @@ import styled from 'styled-components';
 export const Card = styled.li`
   box-sizing: border-box;
   height: 567px;
-  width: 302px;
+  width: 30rem;
   border: 1px solid #ececec;
   border-radius: 12px;
   background-color: #ffffff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.13);
   overflow: hidden;
+  margin: 1.3rem;
+
+  :last-child {
+    margin-right: 0;
+  }
 
   display: flex;
   flex-direction: column;

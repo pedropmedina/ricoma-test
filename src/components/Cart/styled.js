@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
+import { mediaQueries } from '../../styles/mediaQueries';
+
 export const Cart = styled.div`
   position: absolute;
-  right: 0;
+  right: 7.3rem;
   top: 100%;
   box-sizing: border-box;
   height: 299px;
@@ -14,6 +16,11 @@ export const Cart = styled.div`
   z-index: 1;
   overflow-y: auto;
   padding: 2rem;
+
+  ${mediaQueries.mobileL`
+    right: 2rem;
+    width: 290px;
+  `}
 `;
 
 export const EmptyCart = styled(Cart)`
@@ -35,6 +42,10 @@ export const CartItem = styled.li`
   :not(:last-child) {
     border-bottom: 0.1rem solid #eee;
   }
+
+  ${mediaQueries.mobileL`
+    padding: 1rem 0;
+  `}
 `;
 
 export const CartPaneLeft = styled.div``;
@@ -51,6 +62,11 @@ export const CartItemTitle = styled.h5`
   font-size: 2.3rem;
   font-weight: 600;
   line-height: 33px;
+
+  ${mediaQueries.mobileL`
+      font-size: 1.6rem;
+      line-height: 23px;
+  `}
 `;
 
 export const CartFigure = styled.figure`
