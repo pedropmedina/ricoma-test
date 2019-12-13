@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { Context } from '../../context';
-import { REMOVE_ITEM } from '../../reducers';
+import { REMOVE_ITEM, TOGGLE_CART } from '../../reducers';
 
 // styles
 import * as Styled from './styled';
@@ -9,19 +9,25 @@ import * as Styled from './styled';
 // assets
 import { ReactComponent as CheckIcon } from '../../assets/White-Check.svg';
 
+// custom hooks
+import { useClickOutside } from '../../hooks/useClickOutside';
+
 const COLOR_BLUE = '#143061';
 const COLOR_PURPLE = '#81396F';
 const COLOR_RED = '#F6437D';
 
 export const Cart = props => {
   const { state, dispatch } = useContext(Context);
+  const { refEl } = useClickOutside(() => {
+    dispatch({ type: TOGGLE_CART });
+  });
 
   const handleRemoveItem = itemId => {
     dispatch({ type: REMOVE_ITEM, payload: itemId });
   };
 
   return (
-    <Styled.Cart>
+    <Styled.Cart ref={refEl}>
       <Styled.CartItems>
         {state.cart.map(item => {
           return (

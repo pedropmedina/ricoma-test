@@ -22,8 +22,6 @@ export const NavItems = styled.ul`
 `;
 
 export const NavItem = styled.li`
-  /* height: 31px;
-	width: 59px; */
   color: #000000;
   font-family: Poppins;
   font-size: 14px;
@@ -69,4 +67,5 @@ export const ToggleCart = styled.span`
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 8px solid #a0a2a6;
+  cursor: pointer;
 `;

@@ -21,8 +21,8 @@ export const CardFigure = styled.figure`
 export const CardImg = styled.img`
   height: 100%;
   width: 100%;
-  object-position: center;
-  object-fit: center;
+  object-fit: cover;
+  object-position: 100% 30%;
 `;
 
 export const CardContent = styled.div`

@@ -1,4 +1,5 @@
 import React, { useContext, useReducer } from 'react';
+import { hot } from 'react-hot-loader/root';
 
 // styles
 import { GlobalStyles } from '../../globalStyles';
@@ -14,7 +15,7 @@ import { Footer } from '../../components/Footer';
 import { Context } from '../../context';
 import { reducer } from '../../reducers';
 
-export const App = () => {
+const App = () => {
   const initialState = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
@@ -32,3 +33,5 @@ export const App = () => {
     </Context.Provider>
   );
 };
+
+export default hot(App);
