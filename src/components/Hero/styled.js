@@ -5,15 +5,26 @@ import { mediaQueries } from '../../styles/mediaQueries';
 import bgImage from '../../assets/Hero-Background.png';
 
 export const Hero = styled.article`
-  min-height: 704px;
+  height: 704px;
   background-image: url(${bgImage});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 48px;
 
+  ${mediaQueries.laptop`
+    padding: 4rem 0;
+    height: 100%;
+  `}
+
+  ${mediaQueries.tablet`
+    padding: 2rem 0;
+    height: 100%;
+  `}
+
   ${mediaQueries.mobileL`
-    padding-top: 10px;
+    padding: 2rem 0;
+    height: 100%;
   `}
 `;
 
@@ -35,8 +46,12 @@ export const HeroSection = styled.section`
   }
 
   @media (max-width: 1150px) {
-    max-width: 100%;
+    max-width: 80%;
   }
+
+  ${mediaQueries.laptop`
+    max-width: 100%;
+  `}
 `;
 
 export const HeroLeftSection = styled(HeroSection)`
