@@ -1,28 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 // styles
 import * as Styled from './styled';
+import { ColorsList, ColorItem } from '../../styles/lists';
 
 // assets
 import { ReactComponent as CheckIcon } from '../../assets/White-Check.svg';
 
+// context and reducers
 import { Context } from '../../context';
 import { ADD_ITEM } from '../../reducers';
 
-const COLOR_BLUE = '#143061';
-const COLOR_PURPLE = '#81396F';
-const COLOR_RED = '#F6437D';
+// hooks
+import { useColors } from '../../hooks/useColors';
 
 export const Card = props => {
   const { dispatch } = useContext(Context);
-  const [selectedColor, setSelectedColor] = useState('#143061');
+  const { colors, selectedColor, setColor } = useColors();
 
   const handleAddToCart = item => {
     dispatch({ type: ADD_ITEM, payload: item });
-  };
-
-  const handleSelectColor = color => {
-    setSelectedColor(color);
   };
 
   return (
@@ -33,29 +30,23 @@ export const Card = props => {
       <Styled.CardContent>
         <Styled.CardTitle>{props.title}</Styled.CardTitle>
         <Styled.CardDescription>{props.description}</Styled.CardDescription>
-        <Styled.CardColors>
-          <Styled.CardColor
-            selected={selectedColor}
-            bgColor={COLOR_BLUE}
-            onClick={() => handleSelectColor(COLOR_BLUE)}
+        <ColorsList>
+          <ColorItem
+            bgColor={colors.blue}
+            onClick={() => setColor(colors.blue)}
           >
-            {selectedColor === COLOR_BLUE && <CheckIcon />}
-          </Styled.CardColor>
-          <Styled.CardColor
-            selected={selectedColor}
-            bgColor={COLOR_PURPLE}
-            onClick={() => handleSelectColor(COLOR_PURPLE)}
+            {selectedColor === colors.blue && <CheckIcon />}
+          </ColorItem>
+          <ColorItem
+            bgColor={colors.purple}
+            onClick={() => setColor(colors.purple)}
           >
-            {selectedColor === COLOR_PURPLE && <CheckIcon />}
-          </Styled.CardColor>
-          <Styled.CardColor
-            bgColor={COLOR_RED}
-            selected={selectedColor}
-            onClick={() => handleSelectColor(COLOR_RED)}
-          >
-            {selectedColor === COLOR_RED && <CheckIcon />}
-          </Styled.CardColor>
-        </Styled.CardColors>
+            {selectedColor === colors.purple && <CheckIcon />}
+          </ColorItem>
+          <ColorItem bgColor={colors.red} onClick={() => setColor(colors.red)}>
+            {selectedColor === colors.red && <CheckIcon />}
+          </ColorItem>
+        </ColorsList>
       </Styled.CardContent>
       <Styled.CardButton
         onClick={() => handleAddToCart({ ...props, color: selectedColor })}

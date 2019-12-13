@@ -10,13 +10,20 @@ import { ReactComponent as CartIcon } from '../../assets/Cart-Icon.svg';
 // components
 import { Cart } from '../../components/Cart';
 
+// context and reducers
 import { Context } from '../../context';
 import { TOGGLE_CART } from '../../reducers';
+
+// custom hooks
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 const NAV_ITEMS = ['Lorem', 'Ipsum', ' Excepteur', 'Consectetur', 'Veniam'];
 
 export const Header = () => {
   const { dispatch, state } = useContext(Context);
+  const { refEl } = useClickOutside(() => {
+    dispatch({ type: TOGGLE_CART });
+  });
 
   return (
     <Styled.Header>
@@ -29,11 +36,14 @@ export const Header = () => {
             ))}
           </Styled.NavItems>
         </Styled.Nav>
-        <Styled.HeaderCart count={state.cart.length}>
+        <Styled.HeaderCart
+          count={state.cart.length}
+          onClick={() => dispatch({ type: TOGGLE_CART })}
+        >
           <CartIcon />
-          <Styled.ToggleCart onClick={() => dispatch({ type: TOGGLE_CART })} />
+          <Styled.ToggleCart showCart={state.showCart} />
         </Styled.HeaderCart>
-        {state.showCart && <Cart />}
+        {state.showCart && <Cart refEl={refEl} />}
       </ContainerCenter>
     </Styled.Header>
   );

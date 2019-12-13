@@ -41,6 +41,8 @@ export const CardButton = styled.button`
   font-weight: 600;
   line-height: 16px;
   text-align: center;
+  cursor: pointer;
+  outline: unset;
 `;
 
 export const CardTitle = styled.h3`
@@ -56,24 +58,5 @@ export const CardDescription = styled.p`
   font-family: 'Open Sans';
   font-size: 16px;
   line-height: 24px;
-`;
-
-export const CardColors = styled.ul`
-  list-style: none;
-  margin-top: 25%;
-
-  display: flex;
-`;
-
-export const CardColor = styled.li`
-  height: 32px;
-  width: 32px;
-  border-radius: 5px;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : '#143061')};
-  margin-right: 1.2rem;
-  cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 25%;
 `;

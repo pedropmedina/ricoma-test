@@ -1,8 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Header = styled.header`
   height: 6.6rem;
-  /* width: 1440px; */
   background-color: #ffffff;
   padding: 0 7.3rem;
 `;
@@ -36,6 +35,7 @@ export const HeaderCart = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 
   > svg {
     height: 3rem;
@@ -55,8 +55,9 @@ export const HeaderCart = styled.div`
     border-radius: 50%;
     top: -1rem;
     left: 2rem;
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #fff;
+    font-weight: bold;
   }
 `;
 
@@ -67,5 +68,12 @@ export const ToggleCart = styled.span`
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 8px solid #a0a2a6;
-  cursor: pointer;
+  transition: all 0.1s;
+
+  ${({ showCart }) =>
+    showCart &&
+    css`
+      border-bottom: 8px solid #a0a2a6;
+      border-top: unset;
+    `}
 `;

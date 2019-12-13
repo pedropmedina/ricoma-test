@@ -1,33 +1,35 @@
 import React, { useContext } from 'react';
 
+// context and resolvers
 import { Context } from '../../context';
-import { REMOVE_ITEM, TOGGLE_CART } from '../../reducers';
+import { REMOVE_ITEM, UPDATE_ITEM } from '../../reducers';
 
 // styles
 import * as Styled from './styled';
+import { ColorItem, ColorsList } from '../../styles/lists';
 
 // assets
 import { ReactComponent as CheckIcon } from '../../assets/White-Check.svg';
 
-// custom hooks
-import { useClickOutside } from '../../hooks/useClickOutside';
-
-const COLOR_BLUE = '#143061';
-const COLOR_PURPLE = '#81396F';
-const COLOR_RED = '#F6437D';
+// hooks
+import { useColors } from '../../hooks/useColors';
 
 export const Cart = props => {
   const { state, dispatch } = useContext(Context);
-  const { refEl } = useClickOutside(() => {
-    dispatch({ type: TOGGLE_CART });
-  });
+  const { colors } = useColors();
 
   const handleRemoveItem = itemId => {
     dispatch({ type: REMOVE_ITEM, payload: itemId });
   };
 
-  return (
-    <Styled.Cart ref={refEl}>
+  const handleUpdateItem = update => {
+    dispatch({ type: UPDATE_ITEM, payload: update });
+  };
+
+  return !state.cart.length ? (
+    <Styled.EmptyCart ref={props.refEl}>Cart is empty</Styled.EmptyCart>
+  ) : (
+    <Styled.Cart ref={props.refEl}>
       <Styled.CartItems>
         {state.cart.map(item => {
           return (
@@ -39,17 +41,38 @@ export const Cart = props => {
               </Styled.CartPaneLeft>
               <Styled.CartPaneRight>
                 <Styled.CartItemTitle>{item.title}</Styled.CartItemTitle>
-                <Styled.CartColors>
-                  <Styled.CartColor bgColor={COLOR_BLUE}>
-                    {item.color === COLOR_BLUE && <CheckIcon />}
-                  </Styled.CartColor>
-                  <Styled.CartColor bgColor={COLOR_PURPLE}>
-                    {item.color === COLOR_PURPLE && <CheckIcon />}
-                  </Styled.CartColor>
-                  <Styled.CartColor bgColor={COLOR_RED}>
-                    {item.color === COLOR_RED && <CheckIcon />}
-                  </Styled.CartColor>
-                </Styled.CartColors>
+                <ColorsList>
+                  <ColorItem
+                    height='2.6rem'
+                    width='2.6rem'
+                    bgColor={colors.blue}
+                    onClick={() =>
+                      handleUpdateItem({ id: item.id, color: colors.blue })
+                    }
+                  >
+                    {item.color === colors.blue && <CheckIcon />}
+                  </ColorItem>
+                  <ColorItem
+                    height='2.6rem'
+                    width='2.6rem'
+                    bgColor={colors.purple}
+                    onClick={() =>
+                      handleUpdateItem({ id: item.id, color: colors.purple })
+                    }
+                  >
+                    {item.color === colors.purple && <CheckIcon />}
+                  </ColorItem>
+                  <ColorItem
+                    height='2.6rem'
+                    width='2.6rem'
+                    bgColor={colors.red}
+                    onClick={() =>
+                      handleUpdateItem({ id: item.id, color: colors.red })
+                    }
+                  >
+                    {item.color === colors.red && <CheckIcon />}
+                  </ColorItem>
+                </ColorsList>
                 <Styled.CartButton onClick={() => handleRemoveItem(item.id)}>
                   Remove
                 </Styled.CartButton>
