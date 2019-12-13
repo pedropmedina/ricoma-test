@@ -20,6 +20,34 @@ export const Content = styled.div`
 
 export const ContentInfo = styled.div``;
 
-export const ContentCounter = styled.div`
+export const ContentTime = styled.div`
   margin-left: 2.4rem;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+`;
+
+export const TimeInterval = styled.div`
+  line-height: 1.4;
+  font-family: Poppins;
+
+  :not(:last-child) {
+    margin-right: 3.4rem;
+  }
+`;
+
+export const IntervalName = styled.p`
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  text-align: center;
+`;
+
+export const IntervalNumber = styled.span`
+  display: block;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
 `;
