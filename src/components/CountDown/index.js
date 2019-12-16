@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  addDays,
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds
-} from 'date-fns';
+import { addDays } from 'date-fns';
 
 // styles
 import * as Styled from './styled';
@@ -28,19 +22,20 @@ export const CountDown = () => {
   }, []);
 
   const handleCountDown = () => {
-    const dueDate = addDays(new Date(), 5);
+    const dueTime = addDays(new Date(), 5).getTime();
 
     const interval = setInterval(() => {
-      let currentDate = Date.now(),
-        days = differenceInDays(dueDate, currentDate),
-        hours = differenceInHours(dueDate, currentDate),
-        minutes = differenceInMinutes(dueDate, currentDate),
-        seconds = differenceInSeconds(dueDate, currentDate);
+      let now = new Date().getTime(),
+        time = dueTime - now,
+        days = Math.floor(time / (1000 * 60 * 60 * 24)),
+        hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds = Math.floor((time % (1000 * 60)) / 1000);
 
       setTimes(prevTimes => ({ ...prevTimes, days, hours, minutes, seconds }));
 
       // stop intervals
-      if (minutes === 0) {
+      if (time < 0) {
         clearInterval(interval);
       }
     }, 1000);
